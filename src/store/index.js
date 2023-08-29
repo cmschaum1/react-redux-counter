@@ -1,28 +1,14 @@
-import { createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
 
-import defines from "../Defines";
-
-const defaultValue = {
-  counter: 0,
-};
-
-const counterReducer = (state = defaultValue, action) => {
-  if (action.type === defines.INCREMENT) {
-    return {
-      counter: ++state.counter,
-    };
-  }
-
-  if (action.type === defines.DECREMENT) {
-    return {
-      counter: --state.counter,
-    };
-  }
-
-  return state;
-};
+import authReducer from "./auth";
+import counterReducer from "./counter";
 
 // store
-const store = createStore(counterReducer);
+const store = configureStore({
+  reducer: {
+    counter: counterReducer,
+    auth: authReducer,
+  },
+});
 
 export default store;
